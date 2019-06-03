@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8010/eureka/
+
+  instance:
+    instance-id: kele-practise
+    lease-renewal-interval-in-seconds: 10
+    health-check-url-path: /actuator/health
+
+spring:
+  application:
+    name: kele-practise
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
