@@ -53,6 +53,12 @@ spring:
     host: 192.168.137.130
     password: kele66
     port: 6379
+  #定时任务配置
+  quartz:
+    wait-for-jobs-to-complete-on-shutdown: true
+    properties:
+      #获取锁后执行任务,防止并发情况下污染数据;
+      acquireTriggersWithinLock: true
 
 #actuator监控接口配置
 management:
@@ -63,4 +69,3 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-
