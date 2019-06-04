@@ -14,7 +14,7 @@ spring:
   application:
     name: kele-practise
 
-
+  #数据源相关配置;
   datasource:
     url: jdbc:postgresql://192.168.137.130:5432/keledb
     username: postgres
@@ -48,7 +48,7 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  #redis缓存
+  #redis缓存 默认实现是 lettuceConnection;
   redis:
     host: 192.168.137.130
     password: kele66
