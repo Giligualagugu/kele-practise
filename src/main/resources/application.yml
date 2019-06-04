@@ -15,6 +15,46 @@ spring:
     name: kele-practise
 
 
+  datasource:
+    url: jdbc:postgresql://192.168.137.130:5432/keledb
+    username: postgres
+    password: jialele66
+    druid:
+      initial-size: 10
+      min-idle: 3
+      max-active: 40
+      max-wait: 10000
+      test-on-borrow: false
+      test-on-return: false
+      web-stat-filter:
+        enabled: true
+      filter:
+        stat:
+          slow-sql-millis: 6000
+          log-slow-sql: true
+      stat-view-servlet:
+        enabled: true
+        login-username: kele
+        login-password: kele123
+
+  #spring-data-jpa-config
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  #redis缓存
+  redis:
+    host: 192.168.137.130
+    password: kele66
+    port: 6379
+
+#actuator监控接口配置
 management:
   endpoints:
     web:
@@ -23,3 +63,4 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+

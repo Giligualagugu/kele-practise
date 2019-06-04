@@ -11,20 +11,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-
         ThreadPoolTaskExecutor poolTaskExecutor = new ThreadPoolTaskExecutor();
         poolTaskExecutor.setCorePoolSize(10);
-
         poolTaskExecutor.setMaxPoolSize(100);
-
         poolTaskExecutor.setQueueCapacity(300);
-
-        poolTaskExecutor.initialize();
-
         poolTaskExecutor.setBeanName("kele-taskExecutor");
-
         poolTaskExecutor.setThreadNamePrefix("kele_th_");
-
+        poolTaskExecutor.initialize();
         configurer.setTaskExecutor(poolTaskExecutor);
 
     }
