@@ -20,7 +20,10 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <!--        定时任务-->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>

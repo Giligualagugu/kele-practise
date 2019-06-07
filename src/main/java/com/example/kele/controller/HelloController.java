@@ -14,7 +14,7 @@ public class HelloController {
     @Autowired
     private AsyncTaskExecutor asyncTaskExecutor;
 
-    @GetMapping("/hello")
+    @GetMapping("/hello2")
     public String hello() {
 
         log.info("=====> asyncTaskExecutor is {}", asyncTaskExecutor);
