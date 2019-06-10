@@ -5,7 +5,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * @author xukele
@@ -18,7 +18,7 @@ public class TestMisson extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 
-        log.info("===> test 定时任务,当前时间:{}", LocalDate.now());
+        log.info("===> test 定时任务,当前时间:{}", new Date());
 
     }
 }

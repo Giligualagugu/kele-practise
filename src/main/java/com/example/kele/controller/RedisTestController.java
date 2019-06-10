@@ -22,7 +22,7 @@ public class RedisTestController {
     @Autowired
     private LettuceConnectionFactory lettuceConnectionFactory;
 
-    @GetMapping("/ttredis")
+    @GetMapping("/test/ttredis")
     public Object testRedis() {
 
         stringRedisTemplate.opsForValue().set("tom", "malisu", 60 * 1000L);
