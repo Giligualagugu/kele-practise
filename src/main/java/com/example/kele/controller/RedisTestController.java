@@ -7,6 +7,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author xukele
  * @TIME 2019/6/4 13:41
@@ -25,7 +27,7 @@ public class RedisTestController {
     @GetMapping("/test/ttredis")
     public Object testRedis() {
 
-        stringRedisTemplate.opsForValue().set("tom", "malisu", 60 * 1000L);
+        stringRedisTemplate.opsForValue().set("tom", "malisu", 60 * 1000L, TimeUnit.MILLISECONDS);
 
         String tom = stringRedisTemplate.opsForValue().get("tom");
 

@@ -34,7 +34,7 @@ public class QuartzConfig {
         triggerFactoryBean.setName("test-mission1");
         triggerFactoryBean.setGroup("group1");
 
-        triggerFactoryBean.setCronExpression("2 0/2 * * * ?");
+        triggerFactoryBean.setCronExpression("2 0/30 * * * ?");
         return triggerFactoryBean;
     }
 
