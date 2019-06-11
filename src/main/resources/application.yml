@@ -20,6 +20,7 @@ spring:
     url: jdbc:postgresql://192.168.137.10:5432/keledb
     username: xukele
     password: jialele66
+  
     druid:
       initial-size: 10
       min-idle: 3
@@ -27,16 +28,16 @@ spring:
       max-wait: 10000
       test-on-borrow: false
       test-on-return: false
-      web-stat-filter:
-        enabled: true
-      filter:
-        stat:
-          slow-sql-millis: 6000
-          log-slow-sql: true
-      stat-view-servlet:
-        enabled: true
-        login-username: kele
-        login-password: kele123
+  #      web-stat-filter:
+  #        enabled: true
+  #      filter:
+  #        stat:
+  #          slow-sql-millis: 6000
+  #          log-slow-sql: true
+  #      stat-view-servlet:
+  #        enabled: true
+  #        login-username: kele
+  #        login-password: kele123
 
   #spring-data-jpa-config
   jpa:
@@ -52,7 +53,7 @@ spring:
   #redis缓存 默认实现是 lettuceConnection;
   redis:
     host: 192.168.137.10
-  #  password:
+    #  password:
     port: 6379
   #定时任务配置
   quartz:

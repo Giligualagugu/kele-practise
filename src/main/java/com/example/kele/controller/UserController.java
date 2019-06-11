@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author xukele
  * @since 2019/6/6 21:19
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private LoginUserRepository loginUserRepository;
+
 
     @GetMapping("/test/adduser")
     public Object adduser() {
@@ -31,6 +34,14 @@ public class UserController {
         LoginUser save = loginUserRepository.save(kele);
 
         return save;
+
+    }
+
+    @GetMapping("/getall")
+    public Object getall() {
+        List<LoginUser> all = loginUserRepository.findAll();
+
+        return all;
 
     }
 }
