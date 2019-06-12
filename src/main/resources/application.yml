@@ -71,3 +71,6 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+logging:
+  file: /usr/local/logfiles/practise.log
