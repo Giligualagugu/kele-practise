@@ -4,7 +4,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8010/eureka/
+      defaultZone: http://106.15.238.125:8010/eureka/
 
   instance:
     prefer-ip-address: true
@@ -52,8 +52,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   #redis缓存 默认实现是 lettuceConnection;
   redis:
-    host: 127.0.0.1
-    #  password:
+    host: 106.15.238.125
+    password: $2a$10$i/PCl4EKKPcKYfsHi/aKA.AT/9QVWQI.vWBdBO/rLsB7PuFXu30ti
     port: 6379
   #定时任务配置
   quartz:
