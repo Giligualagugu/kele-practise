@@ -1,6 +1,7 @@
 package com.example.kele.controller;
 
 import com.example.kele.entity.GoldFishEntity;
+import com.example.kele.entity.GoldFishMessage;
 import com.example.kele.repository.GoldFishRepository;
 import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -28,80 +31,94 @@ public class GoldFishController {
         long times = maketimes(count);
 
         //如果有下一页，保留最后一组不处理（最后一组不满三人的话）
-
         List<GoldFishEntity> groupList = new LinkedList<>();
 
         //当前页的最后一组的id；
-        String groupLastId = null;
+        GoldFishEntity groupLastOne = null;
+        String groupFirstId = null;
 
         for (int i = 0; i < times; i++) {
-
             PageRequest pageRequest = PageRequest.of(i, 1000, Sort.Direction.ASC, "groupId");
             List<GoldFishEntity> content = repository.findAll(pageRequest).getContent();
+            if (times == 1) {
+                //只有一页时，一定顺序；
+                dealOne(content);
+            } else {
+                int lenth = content.size();
+                groupFirstId = content.get(0).getGroupId();
 
-            //第一组的id；
-            String groupFirstId = content.get(0).getGroupId();
+                for (int p = 0; p < lenth; p++) {
+                    GoldFishEntity current = content.get(p);
 
-            int size = content.size();
+                    if (groupLastOne != null) {
+                        //有上一条。。。
+                        groupFirstId = groupLastOne.getGroupId();
+                    }
 
-            //每页最后一条；
-            GoldFishEntity lastEntity = content.get(size - 1);
-
-            for (int n = 0; n < size; n++) {
-
-                GoldFishEntity current = content.get(n);
-
-                //小于则是异常数据，跳过；
-                if (current.getGroupId().compareTo(groupFirstId) == -1) {
-                    continue;
+                    if (current.getGroupId().compareTo(groupFirstId) == -1) {
+                        //异常数据；
+                        continue;
+                    }
+                    if (current.getGroupId().compareTo(groupFirstId) == 1) {
+                        groupList.add(current);
+                        continue;
+                    }
+                    if (current.getGroupId().compareTo(groupFirstId) == 1) {
+                        dealOne(groupList);
+                        groupList.clear();
+                        groupList.add(current);
+                        groupFirstId = current.getGroupId();
+                    }
+                    if ((p == lenth - 1) && (i != times - 1) && groupList.size() < 3) {//有下一页，且不满三条，保持最后一条记录；
+                        groupLastOne = current;
+                    }
                 }
-
-                //如果是最后一条数据，则不做处理；
-                if (n == size - 1) {
-                    return;
-                }
-
-
-                //相同则是同一组；
-                if (current.getGroupId().equals(groupFirstId)) {
-                    groupList.add(current);
-                }
-
-                //满员了则跳出；
-                if (groupList.size() == 3) {
-                    groupList.clear();
-                    groupFirstId = current.getGroupId();
-                    continue;
-                }
-
-                //大于则是下一组的,处理上一组的数据；
-                if (current.getGroupId().compareTo(groupFirstId) == 1) {
-                    sendMessage(groupList);
-                    //处理完后清楚；
-                    groupList.clear();
-                    groupList.add(current);
-
-                }
-
-
             }
-
-
         }
 
 
     }
 
-    private void sendMessage(List<GoldFishEntity> groupList) {
+    private void dealOne(List<GoldFishEntity> content) {
+
+        Map<String, List<GoldFishEntity>> collect = content.stream().collect(Collectors.groupingBy(GoldFishEntity::getGroupId));
+        collect.forEach((groupId, entities) -> {
+            if (entities.size() > 2) {
+                return;
+            }
+            GoldFishEntity captian = entities.stream().filter(e -> e.getCaptainMark().equals("1")).findFirst().get();
+            entities.forEach(e -> {
+                GoldFishMessage mss = GoldFishMessage.builder().openId(e.getOpenId())
+                        .groupId(e.getGroupId())
+                        .joinDate(e.getJoinDate())
+                        .captainName(captian.getNickName())
+                        .build();
+
+                sendmessge(mss);
+            });
+        });
     }
 
+    private void sendmessge(GoldFishMessage mss) {
+    }
+
+
     private long maketimes(long count) {
+        if (count < 1000) {
+            return 1L;
+        }
 
         if (count % 1000 == 0) {
             return count / 1000;
         } else {
             return count / 1000 + 1;
         }
+
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(1210 / 1000);
 
     }
 

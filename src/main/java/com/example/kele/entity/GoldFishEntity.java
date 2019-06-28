@@ -32,6 +32,8 @@ public class GoldFishEntity implements Serializable {
     @Column
     private String captainMark;
 
+    private String nickName;
+
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
     private LocalDateTime joinDate;
