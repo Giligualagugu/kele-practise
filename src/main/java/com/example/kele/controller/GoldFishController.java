@@ -3,9 +3,7 @@ package com.example.kele.controller;
 import com.example.kele.entity.GoldFishEntity;
 import com.example.kele.entity.GoldFishMessage;
 import com.example.kele.repository.GoldFishRepository;
-import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -35,7 +33,7 @@ public class GoldFishController {
 
         //当前页的最后一组的id；
         GoldFishEntity groupLastOne = null;
-        String groupFirstId = null;
+        String groupFirstId;
 
         for (int i = 0; i < times; i++) {
             PageRequest pageRequest = PageRequest.of(i, 1000, Sort.Direction.ASC, "groupId");
@@ -55,15 +53,15 @@ public class GoldFishController {
                         groupFirstId = groupLastOne.getGroupId();
                     }
 
-                    if (current.getGroupId().compareTo(groupFirstId) == -1) {
+                    if (current.getGroupId().compareTo(groupFirstId) < 0) {
                         //异常数据；
                         continue;
                     }
-                    if (current.getGroupId().compareTo(groupFirstId) == 1) {
+                    if (current.getGroupId().compareTo(groupFirstId) == 0) {
                         groupList.add(current);
                         continue;
                     }
-                    if (current.getGroupId().compareTo(groupFirstId) == 1) {
+                    if (current.getGroupId().compareTo(groupFirstId) > 0) {
 
                         // 进入新组，先发送上一组的消息；
                         dealOne(groupList);
@@ -90,7 +88,8 @@ public class GoldFishController {
             if (entities.size() > 2) {
                 return;
             }
-            GoldFishEntity captian = entities.stream().filter(e -> e.getCaptainMark().equals("1")).findFirst().get();
+            GoldFishEntity captian = entities.stream().filter(e -> e.getCaptainMark().equals("1")).findFirst().orElse(new GoldFishEntity());
+
             entities.forEach(e -> {
                 GoldFishMessage mss = GoldFishMessage.builder().openId(e.getOpenId())
                         .groupId(e.getGroupId())
