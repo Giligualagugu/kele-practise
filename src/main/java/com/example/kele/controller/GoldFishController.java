@@ -64,13 +64,17 @@ public class GoldFishController {
                         continue;
                     }
                     if (current.getGroupId().compareTo(groupFirstId) == 1) {
+
+                        // 进入新组，先发送上一组的消息；
                         dealOne(groupList);
                         groupList.clear();
                         groupList.add(current);
                         groupFirstId = current.getGroupId();
                     }
-                    if ((p == lenth - 1) && (i != times - 1) && groupList.size() < 3) {//有下一页，且不满三条，保持最后一条记录；
+                    if ((p == lenth - 1) && (i != times - 1) && groupList.size() < 3) {//已经最后一条了，且有下一页，且不满三条，保持最后一条记录；
                         groupLastOne = current;
+                    } else {
+                        dealOne(groupList);
                     }
                 }
             }
@@ -100,6 +104,9 @@ public class GoldFishController {
     }
 
     private void sendmessge(GoldFishMessage mss) {
+
+        System.out.println("send:" + mss);
+
     }
 
 
