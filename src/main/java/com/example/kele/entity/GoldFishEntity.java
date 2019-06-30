@@ -8,7 +8,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -32,10 +31,11 @@ public class GoldFishEntity implements Serializable {
     @Column
     private String captainMark;
 
+    @Column
     private String nickName;
 
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
-    private LocalDateTime joinDate;
+    private Date joinDate;
 
 }
