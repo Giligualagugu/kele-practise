@@ -52,8 +52,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   #redis缓存 默认实现是 lettuceConnection;
   redis:
-    host: 106.15.238.125
-    password: $2a$10$i/PCl4EKKPcKYfsHi/aKA.AT/9QVWQI.vWBdBO/rLsB7PuFXu30ti
+    host: 192.168.226.100
+    password: $2a$10$qy7Bt9VFjZFZ06SyToG9XehXJ8YJDo1r4tDQ9DSYvfV9Pye5ibwLW
     port: 6379
   #定时任务配置
   quartz:
