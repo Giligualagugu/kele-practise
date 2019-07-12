@@ -1,10 +1,10 @@
 server:
-  port: 8080
+  port: 9001
 
 eureka:
   client:
     service-url:
-      defaultZone: http://106.15.238.125:8010/eureka/
+      defaultZone: http://192.168.226.100:9010/eureka/
 
   instance:
     prefer-ip-address: true
@@ -17,27 +17,9 @@ spring:
 
   #数据源相关配置;
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/keledb
-    username: xukele
-    password: kele123
-  
-    druid:
-      initial-size: 10
-      min-idle: 3
-      max-active: 40
-      max-wait: 10000
-      test-on-borrow: false
-      test-on-return: false
-  #      web-stat-filter:
-  #        enabled: true
-  #      filter:
-  #        stat:
-  #          slow-sql-millis: 6000
-  #          log-slow-sql: true
-  #      stat-view-servlet:
-  #        enabled: true
-  #        login-username: kele
-  #        login-password: kele123
+    url: jdbc:mysql://192.168.226.100:3306/keledb?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Jialele666%
 
   #spring-data-jpa-config
   jpa:
@@ -49,7 +31,7 @@ spring:
         format_sql: true
         temp:
           use_jdbc_metadata_defaults: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
   #redis缓存 默认实现是 lettuceConnection;
   redis:
     host: 192.168.226.100
