@@ -29,8 +29,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        temp:
-          use_jdbc_metadata_defaults: false
     database-platform: org.hibernate.dialect.MySQL8Dialect
   #redis缓存 默认实现是 lettuceConnection;
   redis:
