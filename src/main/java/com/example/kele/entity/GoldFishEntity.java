@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,24 +17,24 @@ import java.util.Date;
 @Entity
 public class GoldFishEntity implements Serializable {
 
-    @Id
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-    @Column
-    private String openId;
+	@Column
+	private String openId;
 
-    @Column
-    private String groupId;
+	@Column
+	private String groupId;
 
-    @Column
-    private String captainMark;
+	@Column
+	private String captainMark;
 
-    @Column
-    private String nickName;
+	@Column
+	private String nickName;
 
-    @Column
-    @Temporal(value = TemporalType.TIMESTAMP)
-    private Date joinDate;
+	@Column
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private Date joinDate;
 
 }
