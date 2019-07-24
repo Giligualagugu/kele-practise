@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active:
+      - dev
+---
+spring:
+  profiles: dev
+  application:
+    name: practise
+  cloud:
+    config:
+      uri: http://106.15.238.125:9099/
+      profile: dev
+      label: master
+
+---
+spring:
+  profiles: test
+  application:
+    name: practise
+  cloud:
+    config:
+      uri: http://106.15.238.125:9099/
+      profile: test
+      label: master
