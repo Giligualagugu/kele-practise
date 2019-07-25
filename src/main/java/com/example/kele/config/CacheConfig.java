@@ -14,7 +14,7 @@ import java.time.Duration;
  * @SINCE 2019/7/23 15:17
  */
 @Configuration
-public class RedisTemplateConfig {
+public class CacheConfig {
 
 	/**
 	 * 设置下redis缓存的时间;

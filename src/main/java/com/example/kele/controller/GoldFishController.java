@@ -40,7 +40,7 @@ public class GoldFishController {
 		lock.setExpireTime(60 * 1000l);
 		log.info("get lock ? " + lock.getLock());
 
-		log.info("releas lock ? " + lock.releaseLock());
+	//	log.info("releas lock ? " + lock.releaseLock());
 
 	}
 

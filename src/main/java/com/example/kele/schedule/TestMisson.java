@@ -1,4 +1,4 @@
-package com.example.kele.component;
+package com.example.kele.schedule;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
