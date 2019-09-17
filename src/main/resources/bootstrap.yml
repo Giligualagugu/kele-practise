@@ -9,7 +9,7 @@ spring:
     name: practise
   cloud:
     config:
-      uri: http://106.15.238.125:9099/
+      uri: http://localhost:9099/
       profile: dev
       label: master
 
